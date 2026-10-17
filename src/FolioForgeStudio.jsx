@@ -3,13 +3,13 @@ import React, { useState, useRef } from 'react';
 export default function FolioForgeStudio() {
   // --- STATE: Candidate Intake & Credentials ---
   const [candidate, setCandidate] = useState({
-    fullName: '',
-    fatherName: '',
-    age: '',
-    location: '',
+    fullName: 'NASEEB',
+    fatherName: 'SABOOR',
+    age: '25',
+    location: 'KABUL',
     educationLevel: 'Bachelor\'s Degree',
-    educationBackground: '',
-    targetVacancy: '',
+    educationBackground: 'MSC',
+    targetVacancy: 'teaching',
     website: ''
   });
 
