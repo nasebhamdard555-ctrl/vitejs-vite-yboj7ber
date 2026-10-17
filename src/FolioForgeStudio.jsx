@@ -278,7 +278,7 @@ export default function FolioForgeStudio() {
         </div>
       </div>
 
-      {/* Embedded CSS for Print Engine */}
+       {/* Embedded CSS for Print Engine */}
       <style
         dangerouslySetInnerHTML={{
           __html: `
