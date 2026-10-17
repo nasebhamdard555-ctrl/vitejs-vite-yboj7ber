@@ -3,24 +3,24 @@ import React, { useState, useRef } from 'react';
 export default function FolioForgeStudio() {
   // --- STATE: Candidate Intake & Credentials ---
   const [candidate, setCandidate] = useState({
-    fullName: 'ELENA ROSTOVA',
-    fatherName: 'VIKTOR ROSTOV',
-    age: '28',
-    location: 'ZURICH',
-    educationLevel: "Master's Degree (M.Sc / M.A / MBA)",
-    educationBackground: 'M.Sc. in Computational Design & AI Systems, ETH Zurich (GPA 3.92/4.0). B.Sc. in Computer Science & Engineering. Dean\'s Honor List.',
-    targetVacancy: 'Principal Product Architect & AI Systems Lead',
-    website: 'https://rostova-systems.dev'
+    fullName: '',
+    fatherName: '',
+    age: '',
+    location: '',
+    educationLevel: "Bachelor's Degree",
+    educationBackground: '',
+    targetVacancy: '',
+    website: ''
   });
 
   const [documents, setDocuments] = useState({
-    educational: 'M.Sc. in Computational Design & AI Systems, ETH Zurich (GPA 3.92/4.0). B.Sc. in Computer Science & Engineering. Dean\'s Honor List.',
-    experience: 'Principal Systems Architect at Helvetia Neural Labs (2022-Present): Led 28 engineers, launched AetherFlow Neural Studio (80k+ users, 99.98% uptime). Senior Staff Engineer at Vanguard Spatial (2019-2022): Reduced latency by...',
-    recommendation: 'Recommended by Dr. Marcus Vance (VP of Engineering): "Top 0.1% systems architect combining mathematical rigor with extraordinary visual polish and executive delivery."'
+    educational: '',
+    experience: '',
+    recommendation: ''
   });
 
   const [photoUrl, setPhotoUrl] = useState('');
-  const [theme, setTheme] = useState('blueprint'); // obsidian, brutalist, minimal, blueprint
+  const [theme, setTheme] = useState('blueprint'); 
 
   // --- REFS for PDF and HTML Export ---
   const portfolioRef = useRef(null);
@@ -114,7 +114,7 @@ export default function FolioForgeStudio() {
           >
             <option value="High School">High School</option>
             <option value="Bachelor's Degree">Bachelor's Degree</option>
-            <option value="Master's Degree (M.Sc / M.A / MBA)">Master's Degree</option>
+            <option value="Master's Degree">Master's Degree</option>
             <option value="PhD">PhD</option>
           </select>
           <textarea
@@ -133,7 +133,7 @@ export default function FolioForgeStudio() {
           <input
             className="p-2 border rounded bg-gray-950 border-gray-700 text-white"
             name="targetVacancy"
-            placeholder="Target Vacancy (e.g., Software Engineer)"
+            placeholder="Target Vacancy"
             value={candidate.targetVacancy}
             onChange={handleInputChange}
           />
@@ -221,10 +221,12 @@ export default function FolioForgeStudio() {
               )}
               <div className="text-center md:text-left">
                 <h1 className="text-4xl md:text-5xl font-bold mb-2 uppercase tracking-tight">
-                  {candidate.fullName}
+                  {candidate.fullName || 'Candidate Name'}
                 </h1>
                 <h2 className="text-xl md:text-2xl opacity-80 font-medium">
-                  {candidate.targetVacancy ? `Aligned for: ${candidate.targetVacancy}` : candidate.educationLevel}
+                  {candidate.targetVacancy 
+                    ? `Aligned for: ${candidate.targetVacancy}` 
+                    : candidate.educationLevel}
                 </h2>
                 <div className="mt-3 text-sm opacity-70 flex gap-4 flex-wrap justify-center md:justify-start">
                   {candidate.location && <span>📍 {candidate.location}</span>}
