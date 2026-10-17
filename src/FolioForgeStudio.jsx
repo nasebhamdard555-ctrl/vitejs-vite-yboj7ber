@@ -64,7 +64,7 @@ export default function FolioForgeStudio() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 p-4 md:p-8 flex flex-col lg:flex-row gap-8">
+    <div className={`min-h-screen p-4 md:p-8 flex flex-col lg:flex-row gap-8 transition-colors duration-500 ${theme === 'blueprint' ? 'bg-[#0b1329]' : 'bg-gray-900'}`}>
       {/* LEFT PANEL: Builder Studio (Hidden when printing) */}
       <div className="w-full lg:w-1/3 bg-gray-800 p-6 rounded-xl shadow-xl border border-gray-700 no-print flex flex-col gap-6 h-fit text-white">
         <h2 className="text-2xl font-bold border-b border-gray-700 pb-2">FolioForge Studio</h2>
@@ -72,7 +72,7 @@ export default function FolioForgeStudio() {
         <div className="flex flex-col gap-3">
           <h3 className="font-semibold text-gray-400">1. Required Information</h3>
           <input
-            className="p-2 border rounded bg-gray-950 border-gray-700 text-white"
+            className="p-2 border rounded bg-gray-950 border-gray-700 text-white placeholder-gray-500 focus:border-[#00a8ff] focus:outline-none"
             name="fullName"
             placeholder="Full Name *"
             value={candidate.fullName}
@@ -80,7 +80,7 @@ export default function FolioForgeStudio() {
             required
           />
           <input
-            className="p-2 border rounded bg-gray-950 border-gray-700 text-white"
+            className="p-2 border rounded bg-gray-950 border-gray-700 text-white placeholder-gray-500 focus:border-[#00a8ff] focus:outline-none"
             name="fatherName"
             placeholder="Father's Name *"
             value={candidate.fatherName}
@@ -89,7 +89,7 @@ export default function FolioForgeStudio() {
           />
           <div className="flex gap-2">
             <input
-              className="p-2 border rounded w-1/3 bg-gray-950 border-gray-700 text-white"
+              className="p-2 border rounded w-1/3 bg-gray-950 border-gray-700 text-white placeholder-gray-500 focus:border-[#00a8ff] focus:outline-none"
               name="age"
               type="number"
               placeholder="Age *"
@@ -98,7 +98,7 @@ export default function FolioForgeStudio() {
               required
             />
             <input
-              className="p-2 border rounded w-2/3 bg-gray-950 border-gray-700 text-white"
+              className="p-2 border rounded w-2/3 bg-gray-950 border-gray-700 text-white placeholder-gray-500 focus:border-[#00a8ff] focus:outline-none"
               name="location"
               placeholder="Location *"
               value={candidate.location}
@@ -107,7 +107,7 @@ export default function FolioForgeStudio() {
             />
           </div>
           <select
-            className="p-2 border rounded bg-gray-950 border-gray-700 text-white"
+            className="p-2 border rounded bg-gray-950 border-gray-700 text-white focus:border-[#00a8ff] focus:outline-none"
             name="educationLevel"
             value={candidate.educationLevel}
             onChange={handleInputChange}
@@ -118,7 +118,7 @@ export default function FolioForgeStudio() {
             <option value="PhD">PhD</option>
           </select>
           <textarea
-            className="p-2 border rounded bg-gray-950 border-gray-700 text-white"
+            className="p-2 border rounded bg-gray-950 border-gray-700 text-white placeholder-gray-500 focus:border-[#00a8ff] focus:outline-none"
             name="educationBackground"
             placeholder="Education Background Details *"
             value={candidate.educationBackground}
@@ -131,14 +131,14 @@ export default function FolioForgeStudio() {
         <div className="flex flex-col gap-3">
           <h3 className="font-semibold text-gray-400">2. Target Role & Photo (Optional)</h3>
           <input
-            className="p-2 border rounded bg-gray-950 border-gray-700 text-white"
+            className="p-2 border rounded bg-gray-950 border-gray-700 text-white placeholder-gray-500 focus:border-[#00a8ff] focus:outline-none"
             name="targetVacancy"
             placeholder="Target Vacancy"
             value={candidate.targetVacancy}
             onChange={handleInputChange}
           />
           <input
-            className="p-2 border rounded bg-gray-950 border-gray-700 text-white"
+            className="p-2 border rounded bg-gray-950 border-gray-700 text-white placeholder-gray-500 focus:border-[#00a8ff] focus:outline-none"
             name="website"
             placeholder="Portfolio Link / Website"
             value={candidate.website}
@@ -153,7 +153,7 @@ export default function FolioForgeStudio() {
         <div className="flex flex-col gap-3">
           <h3 className="font-semibold text-gray-400">3. Credentials & Alignment</h3>
           <textarea
-            className="p-2 border rounded text-sm bg-gray-950 border-gray-700 text-white"
+            className="p-2 border rounded text-sm bg-gray-950 border-gray-700 text-white placeholder-gray-500 focus:border-[#00a8ff] focus:outline-none"
             name="educational"
             rows="2"
             placeholder="Paste Educational Documents/Transcripts..."
@@ -161,7 +161,7 @@ export default function FolioForgeStudio() {
             onChange={handleDocChange}
           />
           <textarea
-            className="p-2 border rounded text-sm bg-gray-950 border-gray-700 text-white"
+            className="p-2 border rounded text-sm bg-gray-950 border-gray-700 text-white placeholder-gray-500 focus:border-[#00a8ff] focus:outline-none"
             name="experience"
             rows="2"
             placeholder="Paste Experience Letters..."
@@ -169,7 +169,7 @@ export default function FolioForgeStudio() {
             onChange={handleDocChange}
           />
           <textarea
-            className="p-2 border rounded text-sm bg-gray-950 border-gray-700 text-white"
+            className="p-2 border rounded text-sm bg-gray-950 border-gray-700 text-white placeholder-gray-500 focus:border-[#00a8ff] focus:outline-none"
             name="recommendation"
             rows="2"
             placeholder="Paste Recommendation Letters..."
@@ -186,7 +186,7 @@ export default function FolioForgeStudio() {
           <div className="flex gap-2 items-center">
             <span className="text-sm font-bold text-gray-400">THEME:</span>
             <select
-              className="p-1 border rounded text-sm bg-gray-950 border-gray-700 text-white"
+              className="p-1 border rounded text-sm bg-gray-950 border-gray-700 text-white focus:border-[#00a8ff] focus:outline-none"
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
             >
@@ -207,16 +207,16 @@ export default function FolioForgeStudio() {
         {/* Portfolio Canvas */}
         <div
           ref={portfolioRef}
-          className={`p-8 md:p-10 rounded-xl shadow-2xl min-h-[700px] transition-all print-avoid-break ${getThemeStyles()}`}
+          className={`p-8 md:p-10 rounded-xl shadow-2xl min-h-[700px] transition-all duration-500 print-avoid-break ${getThemeStyles()}`}
         >
           <div className="flex flex-col gap-8">
             {/* Header Section */}
-            <div className="flex flex-col md:flex-row items-center gap-6 border-b pb-8 border-[#00a8ff] border-opacity-20">
+            <div className="flex flex-col md:flex-row items-center gap-6 border-b pb-8 border-current border-opacity-20">
               {photoUrl && (
                 <img
                   src={photoUrl}
                   alt="Profile"
-                  className="w-32 h-32 rounded-full object-cover border-4 border-[#00a8ff] shadow-md"
+                  className="w-32 h-32 rounded-full object-cover border-4 border-current shadow-md"
                 />
               )}
               <div className="text-center md:text-left">
@@ -242,13 +242,13 @@ export default function FolioForgeStudio() {
               <h3 className="text-lg font-bold uppercase tracking-widest mb-3 opacity-60">
                 Educational Documents
               </h3>
-              <div className="p-4 border rounded border-[#00a8ff] border-opacity-20 bg-black/10">
+              <div className="p-4 border rounded border-current border-opacity-20 bg-black/10">
                 <p className="font-semibold text-lg">{candidate.educationLevel}</p>
                 <p className="mt-2 opacity-85 whitespace-pre-wrap leading-relaxed">
-                  {candidate.educationBackground}
+                  {candidate.educationBackground || 'Educational background details will appear here.'}
                 </p>
                 {documents.educational && (
-                  <div className="mt-4 pt-4 border-t border-[#00a8ff] border-opacity-10 text-sm opacity-80">
+                  <div className="mt-4 pt-4 border-t border-current border-opacity-10 text-sm opacity-80">
                     <strong>Transcripts:</strong> {documents.educational}
                   </div>
                 )}
@@ -257,20 +257,23 @@ export default function FolioForgeStudio() {
 
             {/* Experience Letters & Recommendations */}
             <div className="grid md:grid-cols-2 gap-6 print-avoid-break">
-              <div className="p-5 border rounded border-[#00a8ff] border-opacity-20 bg-black/10">
+              <div className="p-5 border rounded border-current border-opacity-20 bg-black/10">
                 <h3 className="text-lg font-bold uppercase tracking-widest mb-3 opacity-60">
                   Experience Letters
                 </h3>
                 <p className="opacity-80 text-sm whitespace-pre-wrap leading-relaxed">
-                  {documents.experience}
+                  {documents.experience ||
+                    'No experience documents added yet. Input metrics or letters in the studio panel to display here.'}
                 </p>
               </div>
-              <div className="p-5 border rounded border-[#00a8ff] border-opacity-20 bg-black/10">
+              <div className="p-5 border rounded border-current border-opacity-20 bg-black/10">
                 <h3 className="text-lg font-bold uppercase tracking-widest mb-3 opacity-60">
                   Recommendation Letters
                 </h3>
                 <p className="opacity-80 text-sm italic whitespace-pre-wrap leading-relaxed">
-                  {documents.recommendation}
+                  {documents.recommendation
+                    ? `"${documents.recommendation}"`
+                    : 'No recommendation letters provided.'}
                 </p>
               </div>
             </div>
@@ -278,7 +281,7 @@ export default function FolioForgeStudio() {
         </div>
       </div>
 
-       {/* Embedded CSS for Print Engine */}
+      {/* Embedded CSS for Print Engine */}
       <style
         dangerouslySetInnerHTML={{
           __html: `
