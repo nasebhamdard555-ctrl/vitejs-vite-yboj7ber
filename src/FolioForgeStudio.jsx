@@ -21,7 +21,7 @@ export default function FolioForgeStudio() {
 
   const [photoUrl, setPhotoUrl] = useState('');
   const [theme, setTheme] = useState('obsidian'); // obsidian, brutalist, minimal, cyber
-  const [isGenerated, setIsGenerated] = useState(false);
+  const [isGenerated, setIsGenerated] = useState(true);
 
   // --- REFS for PDF and HTML Export ---
   const portfolioRef = useRef(null);
