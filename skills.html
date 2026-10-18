@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills | Naseebullah Safi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }, colors: { void: '#050811', obsidian: '#0b1120' } } }
+        }
+    </script>
+    <style>
+        body { background-color: #050811; color: #e2e8f0; overflow-x: hidden; }
+        #webgl-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        .glass-panel { background: rgba(13, 21, 38, 0.74); backdrop-filter: blur(18px); border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.55); }
+        .tilt-card { transform-style: preserve-3d; transition: transform 0.18s ease-out, border-color 0.3s ease; }
+        .tilt-card:hover { border-color: rgba(245, 158, 11, 0.55); }
+        .page-enter { animation: pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-void/90 backdrop-blur-xl border-b border-emerald-500/20">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center font-mono font-bold text-emerald-400">&lt;NS/&gt;</div>
+                <div>
+                    <span class="font-display font-bold text-white text-base block leading-none">Naseebullah Safi</span>
+                    <span class="font-mono text-[11px] text-amber-400">06 // SKILLS.HTML</span>
+                </div>
+            </a>
+            <div class="hidden lg:flex items-center gap-2 text-sm font-medium">
+                <a href="index.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Home</a>
+                <a href="about.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">About</a>
+                <a href="education.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Education</a>
+                <a href="experience.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Experience</a>
+                <a href="projects.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Projects</a>
+                <a href="skills.html" class="px-3.5 py-2 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300">Skills</a>
+                <a href="contact.html" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-bold ml-2">Contact</a>
+            </div>
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300"><i class="fa-solid fa-bars"></i></button>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden bg-obsidian border-t border-slate-800 px-6 py-4 flex flex-col gap-2 text-sm">
+            <a href="index.html" class="py-2 text-slate-300">01. Home</a>
+            <a href="about.html" class="py-2 text-slate-300">02. About</a>
+            <a href="education.html" class="py-2 text-slate-300">03. Education</a>
+            <a href="experience.html" class="py-2 text-slate-300">04. Experience</a>
+            <a href="projects.html" class="py-2 text-slate-300">05. Projects</a>
+            <a href="skills.html" class="py-2 text-emerald-400 font-semibold">06. Skills</a>
+            <a href="contact.html" class="py-2 text-amber-400">07. Contact</a>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 page-enter">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-10">
+            <div>
+                <span class="font-mono text-xs uppercase tracking-widest text-amber-400 block mb-1">PAGE 06 // SKILLS.HTML</span>
+                <h1 class="font-display text-3xl sm:text-5xl font-bold text-white">Technical Arsenal & Proficiencies</h1>
+            </div>
+            <div class="flex gap-2">
+                <a href="projects.html" class="px-4 py-2 rounded-xl glass-panel text-xs font-mono text-slate-300 hover:text-white">&larr; projects.html</a>
+                <a href="contact.html" class="px-4 py-2 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-xs font-mono text-emerald-300 hover:bg-emerald-500 hover:text-slate-950 transition">contact.html &rarr;</a>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- Skill Group 1 -->
+            <div class="tilt-card glass-panel rounded-3xl p-7 space-y-5">
+                <h2 class="font-display text-xl font-bold text-white border-b border-slate-800 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-code text-emerald-400"></i> Full-Stack Web & Software Engineering
+                </h2>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5"><span>HTML5, CSS3, Tailwind CSS & 3D UI</span><span class="font-mono text-emerald-400">95%</span></div>
+                        <div class="w-full h-2.5 bg-void rounded-full overflow-hidden border border-slate-800"><div class="h-full bg-gradient-to-r from-emerald-500 to-sky-400 rounded-full" style="width:95%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5"><span>JavaScript & Interactive Front-End</span><span class="font-mono text-emerald-400">90%</span></div>
+                        <div class="w-full h-2.5 bg-void rounded-full overflow-hidden border border-slate-800"><div class="h-full bg-gradient-to-r from-emerald-500 to-sky-400 rounded-full" style="width:90%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5"><span>WordPress, Elementor & DNS Management</span><span class="font-mono text-emerald-400">94%</span></div>
+                        <div class="w-full h-2.5 bg-void rounded-full overflow-hidden border border-slate-800"><div class="h-full bg-gradient-to-r from-emerald-500 to-sky-400 rounded-full" style="width:94%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5"><span>Relational Databases & System Architecture</span><span class="font-mono text-emerald-400">88%</span></div>
+                        <div class="w-full h-2.5 bg-void rounded-full overflow-hidden border border-slate-800"><div class="h-full bg-gradient-to-r from-emerald-500 to-sky-400 rounded-full" style="width:88%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Group 2 -->
+            <div class="tilt-card glass-panel rounded-3xl p-7 space-y-5">
+                <h2 class="font-display text-xl font-bold text-white border-b border-slate-800 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-amber-400"></i> AI, Security & Marketplace SEO
+                </h2>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5"><span>AI Prompt Engineering & LLM Automation</span><span class="font-mono text-amber-400">96%</span></div>
+                        <div class="w-full h-2.5 bg-void rounded-full overflow-hidden border border-slate-800"><div class="h-full bg-gradient-to-r from-amber-500 to-emerald-400 rounded-full" style="width:96%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5"><span>Wildberries & Ozon SEO & Brand Management</span><span class="font-mono text-amber-400">95%</span></div>
+                        <div class="w-full h-2.5 bg-void rounded-full overflow-hidden border border-slate-800"><div class="h-full bg-gradient-to-r from-amber-500 to-emerald-400 rounded-full" style="width:95%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5"><span>Network Security (CCNA, Palo Alto, CEH)</span><span class="font-mono text-amber-400">90%</span></div>
+                        <div class="w-full h-2.5 bg-void rounded-full overflow-hidden border border-slate-800"><div class="h-full bg-gradient-to-r from-amber-500 to-emerald-400 rounded-full" style="width:90%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5"><span>Linux Administration & Mobile App Teaching</span><span class="font-mono text-amber-400">92%</span></div>
+                        <div class="w-full h-2.5 bg-void rounded-full overflow-hidden border border-slate-800"><div class="h-full bg-gradient-to-r from-amber-500 to-emerald-400 rounded-full" style="width:92%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                card.style.transform = `perspective(1000px) rotateX(${((e.clientY - r.top)/r.height - 0.5)*-8}deg) rotateY(${((e.clientX - r.left)/r.width - 0.5)*8}deg)`;
+            });
+            card.addEventListener('mouseleave', () => card.style.transform = 'none');
+        });
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-canvas'), alpha: true, antialias: true });
+        renderer.setSize(innerWidth, innerHeight);
+        const dodeca = new THREE.Mesh(new THREE.DodecahedronGeometry(1.8, 1), new THREE.MeshBasicMaterial({ color: 0xfbbf24, wireframe: true, transparent: true, opacity: 0.14 }));
+        scene.add(dodeca);
+        function animate() { requestAnimationFrame(animate); dodeca.rotation.y += 0.0025; dodeca.rotation.x += 0.0015; renderer.render(scene, camera); }
+        animate();
+        window.addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+    </script>
+</body>
+</html>
