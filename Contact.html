@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Naseebullah Safi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }, colors: { void: '#050811', obsidian: '#0b1120' } } }
+        }
+    </script>
+    <style>
+        body { background-color: #050811; color: #e2e8f0; overflow-x: hidden; }
+        #webgl-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        .glass-panel { background: rgba(13, 21, 38, 0.74); backdrop-filter: blur(18px); border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.55); }
+        .tilt-card { transform-style: preserve-3d; transition: transform 0.18s ease-out, border-color 0.3s ease; }
+        .tilt-card:hover { border-color: rgba(16, 185, 129, 0.55); }
+        .page-enter { animation: pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-void/90 backdrop-blur-xl border-b border-emerald-500/20">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center font-mono font-bold text-emerald-400">&lt;NS/&gt;</div>
+                <div>
+                    <span class="font-display font-bold text-white text-base block leading-none">Naseebullah Safi</span>
+                    <span class="font-mono text-[11px] text-sky-400">07 // CONTACT.HTML</span>
+                </div>
+            </a>
+            <div class="hidden lg:flex items-center gap-2 text-sm font-medium">
+                <a href="index.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Home</a>
+                <a href="about.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">About</a>
+                <a href="education.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Education</a>
+                <a href="experience.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Experience</a>
+                <a href="projects.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Projects</a>
+                <a href="skills.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Skills</a>
+                <a href="contact.html" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-bold ml-2">Contact</a>
+            </div>
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300"><i class="fa-solid fa-bars"></i></button>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden bg-obsidian border-t border-slate-800 px-6 py-4 flex flex-col gap-2 text-sm">
+            <a href="index.html" class="py-2 text-slate-300">01. Home</a>
+            <a href="about.html" class="py-2 text-slate-300">02. About</a>
+            <a href="education.html" class="py-2 text-slate-300">03. Education</a>
+            <a href="experience.html" class="py-2 text-slate-300">04. Experience</a>
+            <a href="projects.html" class="py-2 text-slate-300">05. Projects</a>
+            <a href="skills.html" class="py-2 text-slate-300">06. Skills</a>
+            <a href="contact.html" class="py-2 text-emerald-400 font-semibold">07. Contact</a>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 page-enter">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-10">
+            <div>
+                <span class="font-mono text-xs uppercase tracking-widest text-sky-400 block mb-1">PAGE 07 // CONTACT.HTML</span>
+                <h1 class="font-display text-3xl sm:text-5xl font-bold text-white">Initiate Collaboration</h1>
+            </div>
+            <div class="flex gap-2">
+                <a href="skills.html" class="px-4 py-2 rounded-xl glass-panel text-xs font-mono text-slate-300 hover:text-white">&larr; skills.html</a>
+                <a href="index.html" class="px-4 py-2 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-xs font-mono text-emerald-300 hover:bg-emerald-500 hover:text-slate-950 transition">index.html &uarr;</a>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-5 space-y-4">
+                <div class="tilt-card glass-panel rounded-3xl p-7 space-y-5">
+                    <h2 class="font-display text-xl font-bold text-white">Direct Channels</h2>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        Available for full-stack web architecture, AI automation workflows, network security consulting, and e-commerce SEO scaling.
+                    </p>
+                    <div class="space-y-3 pt-2">
+                        <a href="https://github.com/nasebhamdard555-ctrl/portfolio-website-" target="_blank" class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-void/80 border border-slate-800 hover:border-emerald-500/50 transition">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400"><i class="fa-brands fa-github"></i></div>
+                            <div>
+                                <div class="text-xs text-slate-400 font-mono">GitHub Repository</div>
+                                <div class="text-sm font-semibold text-white">nasebhamdard555-ctrl/portfolio-website-</div>
+                            </div>
+                        </a>
+                        <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-void/80 border border-slate-800">
+                            <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400"><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <div class="text-xs text-slate-400 font-mono">Base & Availability</div>
+                                <div class="text-sm font-semibold text-white">Kabul, Afghanistan &bull; Global Remote</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-void/80 border border-slate-800">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400"><i class="fa-solid fa-language"></i></div>
+                            <div>
+                                <div class="text-xs text-slate-400 font-mono">Languages Spoken</div>
+                                <div class="text-sm font-semibold text-white">English, Pashto, Dari, Urdu</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7">
+                <form onsubmit="event.preventDefault(); document.getElementById('toast').classList.remove('hidden'); this.reset();" class="tilt-card glass-panel rounded-3xl p-8 space-y-5">
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block font-mono text-xs text-slate-300 mb-2">YOUR NAME</label>
+                            <input type="text" required placeholder="Enter your name" class="w-full px-4 py-3 rounded-xl bg-void/90 border border-slate-700 text-white focus:outline-none focus:border-emerald-400 text-sm">
+                        </div>
+                        <div>
+                            <label class="block font-mono text-xs text-slate-300 mb-2">YOUR EMAIL</label>
+                            <input type="email" required placeholder="name@company.com" class="w-full px-4 py-3 rounded-xl bg-void/90 border border-slate-700 text-white focus:outline-none focus:border-emerald-400 text-sm">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-mono text-xs text-slate-300 mb-2">PROJECT DOMAIN</label>
+                        <input type="text" required placeholder="Full-Stack Web / AI Workflow / E-Commerce SEO" class="w-full px-4 py-3 rounded-xl bg-void/90 border border-slate-700 text-white focus:outline-none focus:border-emerald-400 text-sm">
+                    </div>
+                    <div>
+                        <label class="block font-mono text-xs text-slate-300 mb-2">MESSAGE</label>
+                        <textarea rows="4" required placeholder="Describe your project goals and timeline..." class="w-full px-4 py-3 rounded-xl bg-void/90 border border-slate-700 text-white focus:outline-none focus:border-emerald-400 text-sm"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 text-slate-950 font-bold hover:brightness-110 transition shadow-lg shadow-emerald-500/20">
+                        <i class="fa-solid fa-paper-plane mr-2"></i>Send Transmission
+                    </button>
+                    <div id="toast" class="hidden p-3.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-center text-sm font-mono">
+                        Transmission logged! Thank you for reaching out.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                card.style.transform = `perspective(1000px) rotateX(${((e.clientY - r.top)/r.height - 0.5)*-6}deg) rotateY(${((e.clientX - r.left)/r.width - 0.5)*6}deg)`;
+            });
+            card.addEventListener('mouseleave', () => card.style.transform = 'none');
+        });
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-canvas'), alpha: true, antialias: true });
+        renderer.setSize(innerWidth, innerHeight);
+        const sphere = new THREE.Mesh(new THREE.SphereGeometry(1.8, 20, 20), new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.14 }));
+        scene.add(sphere);
+        function animate() { requestAnimationFrame(animate); sphere.rotation.y += 0.0025; sphere.rotation.x += 0.001; renderer.render(scene, camera); }
+        animate();
+        window.addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+    </script>
+</body>
+</html>
