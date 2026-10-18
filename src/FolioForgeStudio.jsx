@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   User,
   Briefcase,
@@ -16,15 +16,80 @@ import {
   Mail,
   Phone,
   Globe,
-  Plus,
   X,
   FileCheck,
-  Image as ImageIcon,
   Layers,
   ChevronRight,
-  ExternalLink,
-  ShieldCheck
+  ShieldCheck,
+  HardDrive,
+  RotateCcw
 } from 'lucide-react';
+
+// --- Native IndexedDB Helper for Large PDF & Image Persistence ---
+const DB_NAME = 'FolioForgeVaultDB';
+const DB_VERSION = 1;
+const STORE_NAME = 'credentials';
+
+const openVaultDB = () => {
+  return new Promise((resolve, reject) => {
+    if (typeof window === 'undefined' || !window.indexedDB) {
+      reject(new Error('IndexedDB not supported'));
+      return;
+    }
+    const request = window.indexedDB.open(DB_NAME, DB_VERSION);
+    request.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME);
+      }
+    };
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+};
+
+const saveDocsToDB = async (docsObject) => {
+  try {
+    const db = await openVaultDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, 'readwrite');
+      tx.objectStore(STORE_NAME).put(docsObject, 'uploaded_documents');
+      tx.oncomplete = () => resolve(true);
+      tx.onerror = () => reject(tx.error);
+    });
+  } catch (err) {
+    console.warn('Could not save documents to IndexedDB:', err);
+  }
+};
+
+const loadDocsFromDB = async () => {
+  try {
+    const db = await openVaultDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, 'readonly');
+      const req = tx.objectStore(STORE_NAME).get('uploaded_documents');
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => reject(req.error);
+    });
+  } catch (err) {
+    console.warn('Could not load documents from IndexedDB:', err);
+    return null;
+  }
+};
+
+const clearDocsFromDB = async () => {
+  try {
+    const db = await openVaultDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, 'readwrite');
+      tx.objectStore(STORE_NAME).delete('uploaded_documents');
+      tx.oncomplete = () => resolve(true);
+      tx.onerror = () => reject(tx.error);
+    });
+  } catch (err) {
+    console.warn('Could not clear IndexedDB:', err);
+  }
+};
 
 const THEMES = {
   obsidian: {
@@ -108,33 +173,48 @@ const DOCUMENT_CATEGORIES = [
   }
 ];
 
+const DEFAULT_CANDIDATE = {
+  fullName: 'Naseebullah Safi',
+  headline: 'Head of Technology & Computer Science Specialist',
+  age: '25',
+  location: 'Kabul, Afghanistan',
+  email: 'naseeb@afexconsultancy.com',
+  phone: '+93 70 000 0000',
+  website: 'github.com/nasebhamdard555-ctrl',
+  summary:
+    'Computer Science postgraduate (M.Sc. & B.Sc.) and Head of Technology experienced in full-stack web architecture, AI automation workflows, network security (CCNA, Palo Alto, CEH), and scalable e-commerce systems.',
+  skills: 'React, JavaScript, Python, AI Prompt Engineering, CCNA, Palo Alto Firewall, CEH, WordPress/Elementor'
+};
+
+const EMPTY_DOCUMENTS = {
+  degrees: [],
+  transcripts: [],
+  certificates: [],
+  experience: []
+};
+
 export default function FolioForgeStudio() {
-  const [activeTheme, setActiveTheme] = useState('obsidian');
+  const [activeTheme, setActiveTheme] = useState(() => {
+    return localStorage.getItem('folioforge_theme') || 'obsidian';
+  });
   const [activeTab, setActiveTab] = useState('profile');
   const [draggingCat, setDraggingCat] = useState(null);
   const [previewDoc, setPreviewDoc] = useState(null);
+  const [storageReady, setStorageReady] = useState(false);
+  const [savePulse, setSavePulse] = useState(false);
 
-  // Candidate Profile State
-  const [candidate, setCandidate] = useState({
-    fullName: 'Naseebullah Safi',
-    headline: 'Head of Technology & Computer Science Specialist',
-    age: '25',
-    location: 'Kabul, Afghanistan',
-    email: 'naseeb@afexconsultancy.com',
-    phone: '+93 70 000 0000',
-    website: 'github.com/nasebhamdard555-ctrl',
-    summary:
-      'Computer Science postgraduate (M.Sc. & B.Sc.) and Head of Technology experienced in full-stack web architecture, AI automation workflows, network security (CCNA, Palo Alto, CEH), and scalable e-commerce systems.',
-    skills: 'React, JavaScript, Python, AI Prompt Engineering, CCNA, Palo Alto Firewall, CEH, WordPress/Elementor'
+  // Candidate Profile State (Loaded from localStorage)
+  const [candidate, setCandidate] = useState(() => {
+    try {
+      const saved = localStorage.getItem('folioforge_candidate');
+      return saved ? JSON.parse(saved) : DEFAULT_CANDIDATE;
+    } catch {
+      return DEFAULT_CANDIDATE;
+    }
   });
 
-  // Uploaded Document Credentials State
-  const [documents, setDocuments] = useState({
-    degrees: [],
-    transcripts: [],
-    certificates: [],
-    experience: []
-  });
+  // Uploaded Document Credentials State (Loaded from IndexedDB)
+  const [documents, setDocuments] = useState(EMPTY_DOCUMENTS);
 
   // Pending metadata per category before/during upload
   const [docMeta, setDocMeta] = useState({
@@ -145,7 +225,48 @@ export default function FolioForgeStudio() {
   });
 
   const fileInputRefs = useRef({});
-  const theme = THEMES[activeTheme];
+  const theme = THEMES[activeTheme] || THEMES.obsidian;
+
+  // 1. Load persisted documents from IndexedDB on initial mount
+  useEffect(() => {
+    let isMounted = true;
+    loadDocsFromDB().then((savedDocs) => {
+      if (isMounted) {
+        if (savedDocs) {
+          setDocuments({
+            degrees: savedDocs.degrees || [],
+            transcripts: savedDocs.transcripts || [],
+            certificates: savedDocs.certificates || [],
+            experience: savedDocs.experience || []
+          });
+        }
+        setStorageReady(true);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // 2. Save candidate profile & theme to localStorage on change
+  useEffect(() => {
+    try {
+      localStorage.setItem('folioforge_candidate', JSON.stringify(candidate));
+      localStorage.setItem('folioforge_theme', activeTheme);
+    } catch (e) {
+      console.warn('LocalStorage write failed:', e);
+    }
+  }, [candidate, activeTheme]);
+
+  // 3. Save uploaded files to IndexedDB whenever documents change
+  useEffect(() => {
+    if (!storageReady) return;
+    saveDocsToDB(documents).then(() => {
+      setSavePulse(true);
+      const timer = setTimeout(() => setSavePulse(false), 1200);
+      return () => clearTimeout(timer);
+    });
+  }, [documents, storageReady]);
 
   const handleCandidateChange = (e) => {
     const { name, value } = e.target;
@@ -201,7 +322,6 @@ export default function FolioForgeStudio() {
           [catId]: [newDoc, ...prev[catId]]
         }));
 
-        // Reset title input after upload for clean UX
         setDocMeta((prev) => ({
           ...prev,
           [catId]: { ...prev[catId], title: '' }
@@ -228,16 +348,26 @@ export default function FolioForgeStudio() {
     }
   };
 
+  const handleResetVault = async () => {
+    if (!window.confirm('Reset all uploaded documents and restore default profile settings?')) {
+      return;
+    }
+    setDocuments(EMPTY_DOCUMENTS);
+    setCandidate(DEFAULT_CANDIDATE);
+    localStorage.removeItem('folioforge_candidate');
+    await clearDocsFromDB();
+  };
+
   const totalUploadedDocs = Object.values(documents).reduce((acc, list) => acc + list.length, 0);
 
   return (
     <div className={`min-h-screen transition-colors duration-700 ease-out ${theme.bg}`}>
-      {/* Smooth Motion & Print Styles */}
+      {/* Smooth Spring Motion & Print Styles */}
       <style>{`
         @keyframes fadeUpSpring {
           0% {
             opacity: 0;
-            transform: translateY(16px) scale(0.985);
+            transform: translateY(18px) scale(0.985);
           }
           100% {
             opacity: 1;
@@ -261,8 +391,8 @@ export default function FolioForgeStudio() {
           animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         .smooth-card {
-          transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                      box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+          transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+                      box-shadow 0.42s cubic-bezier(0.22, 1, 0.36, 1),
                       border-color 0.3s ease;
         }
         .smooth-card:hover {
@@ -289,20 +419,21 @@ export default function FolioForgeStudio() {
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h1 className="text-lg font-bold tracking-tight flex items-center gap-2">
-                FolioForge Studio
-                <span className={`text-xs px-2.5 py-0.5 rounded-full border ${theme.badge}`}>
-                  Credential Vault v2.0
+              <div className="flex items-center gap-2.5 flex-wrap">
+                <h1 className="text-lg font-bold tracking-tight">FolioForge Studio</h1>
+                <span className={`text-[11px] px-2.5 py-0.5 rounded-full border flex items-center gap-1.5 transition-all duration-300 ${theme.badge}`}>
+                  <HardDrive className={`w-3 h-3 ${savePulse ? 'animate-bounce' : ''}`} />
+                  {savePulse ? 'Saved to Vault' : 'Auto-Saved Locally'}
                 </span>
-              </h1>
+              </div>
               <p className={`text-xs ${theme.muted}`}>
                 Interactive Educational & Professional Document Portfolio Builder
               </p>
             </div>
           </div>
 
-          {/* Theme Switcher & Print Action */}
-          <div className="flex items-center gap-3 flex-wrap">
+          {/* Theme Switcher, Reset & Print Action */}
+          <div className="flex items-center gap-2.5 flex-wrap">
             <div className={`flex items-center p-1 rounded-xl border ${theme.border} bg-black/10`}>
               {Object.values(THEMES).map((t) => (
                 <button
@@ -318,6 +449,15 @@ export default function FolioForgeStudio() {
                 </button>
               ))}
             </div>
+
+            <button
+              onClick={handleResetVault}
+              title="Clear saved documents and reset to default"
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs border ${theme.border} ${theme.muted} hover:opacity-100 opacity-80 transition-all duration-300 active:scale-95`}
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              Clear Vault
+            </button>
 
             <button
               onClick={() => window.print()}
@@ -368,7 +508,7 @@ export default function FolioForgeStudio() {
                 <div>
                   <h2 className="text-base font-bold">Personal & Executive Profile</h2>
                   <p className={`text-xs ${theme.muted}`}>
-                    Updates reflect live in your interactive portfolio preview
+                    Changes auto-save and update live in your portfolio preview
                   </p>
                 </div>
                 <Layers className={`w-5 h-5 ${theme.accent}`} />
@@ -494,7 +634,7 @@ export default function FolioForgeStudio() {
             <div className="space-y-5 animate-spring-in">
               {DOCUMENT_CATEGORIES.map((cat) => {
                 const Icon = cat.icon;
-                const uploadedList = documents[cat.id];
+                const uploadedList = documents[cat.id] || [];
                 const meta = docMeta[cat.id];
                 const isDragging = draggingCat === cat.id;
 
@@ -508,7 +648,7 @@ export default function FolioForgeStudio() {
                         <div>
                           <h3 className="text-sm font-bold">{cat.label}</h3>
                           <p className={`text-xs ${theme.muted}`}>
-                            Upload official scans (PDF, PNG, JPG)
+                            Upload official scans (PDF, PNG, JPG) — Stored in browser vault
                           </p>
                         </div>
                       </div>
@@ -568,7 +708,7 @@ export default function FolioForgeStudio() {
                           e.target.value = '';
                         }}
                       />
-                      <Upload className={`w-6 h-6 mx-auto mb-2 ${theme.accent} transition-transform duration-300 group-hover:-translate-y-1`} />
+                      <Upload className={`w-6 h-6 mx-auto mb-2 ${theme.accent}`} />
                       <p className="text-xs font-semibold">
                         Click to upload or drag & drop your {cat.label.toLowerCase()}
                       </p>
