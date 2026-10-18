@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Naseebullah Safi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }, colors: { void: '#050811', obsidian: '#0b1120' } } }
+        }
+    </script>
+    <style>
+        body { background-color: #050811; color: #e2e8f0; overflow-x: hidden; }
+        #webgl-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        .gradient-text { background: linear-gradient(135deg, #34d399 0%, #38bdf8 50%, #fbbf24 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-panel { background: rgba(13, 21, 38, 0.74); backdrop-filter: blur(18px); border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.55); }
+        .tilt-card { transform-style: preserve-3d; transition: transform 0.18s ease-out, border-color 0.3s ease; }
+        .tilt-card:hover { border-color: rgba(16, 185, 129, 0.55); }
+        .page-enter { animation: pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-void/90 backdrop-blur-xl border-b border-emerald-500/20">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center font-mono font-bold text-emerald-400">&lt;NS/&gt;</div>
+                <div>
+                    <span class="font-display font-bold text-white text-base block leading-none">Naseebullah Safi</span>
+                    <span class="font-mono text-[11px] text-emerald-400">02 // ABOUT.HTML</span>
+                </div>
+            </a>
+            <div class="hidden lg:flex items-center gap-2 text-sm font-medium">
+                <a href="index.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Home</a>
+                <a href="about.html" class="px-3.5 py-2 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300">About</a>
+                <a href="education.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Education</a>
+                <a href="experience.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Experience</a>
+                <a href="projects.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Projects</a>
+                <a href="skills.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Skills</a>
+                <a href="contact.html" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-bold ml-2">Contact</a>
+            </div>
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300"><i class="fa-solid fa-bars"></i></button>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden bg-obsidian border-t border-slate-800 px-6 py-4 flex flex-col gap-2 text-sm">
+            <a href="index.html" class="py-2 text-slate-300">01. Home</a>
+            <a href="about.html" class="py-2 text-emerald-400 font-semibold">02. About</a>
+            <a href="education.html" class="py-2 text-slate-300">03. Education</a>
+            <a href="experience.html" class="py-2 text-slate-300">04. Experience</a>
+            <a href="projects.html" class="py-2 text-slate-300">05. Projects</a>
+            <a href="skills.html" class="py-2 text-slate-300">06. Skills</a>
+            <a href="contact.html" class="py-2 text-amber-400">07. Contact</a>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 page-enter">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-10">
+            <div>
+                <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 block mb-1">PAGE 02 // ABOUT.HTML</span>
+                <h1 class="font-display text-3xl sm:text-5xl font-bold text-white">Who I Am & Engineering Vision</h1>
+            </div>
+            <div class="flex gap-2">
+                <a href="index.html" class="px-4 py-2 rounded-xl glass-panel text-xs font-mono text-slate-300 hover:text-white">&larr; index.html</a>
+                <a href="education.html" class="px-4 py-2 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-xs font-mono text-emerald-300 hover:bg-emerald-500 hover:text-slate-950 transition">education.html &rarr;</a>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-7 tilt-card glass-panel rounded-3xl p-8 flex flex-col justify-between space-y-6">
+                <div class="space-y-5">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
+                        <i class="fa-solid fa-terminal"></i> EXECUTIVE SUMMARY
+                    </span>
+                    <p class="text-slate-300 leading-relaxed">
+                        I am <strong class="text-white">Naseebullah Safi</strong>, a Full-Stack Software Engineer and Head of Technology with a Master's and Bachelor's degree in Computer Science from Pune, India (Fergusson College & Modern College of Arts, Science & Commerce).
+                    </p>
+                    <p class="text-slate-300 leading-relaxed">
+                        My work bridges enterprise software engineering, network security (<span class="text-emerald-400">CCNA, Palo Alto Firewall, Certified Ethical Hacker</span>), and AI-driven e-commerce optimization across major international marketplaces including Wildberries and Ozon.
+                    </p>
+                    <p class="text-slate-300 leading-relaxed">
+                        Whether leading technical operations at AFEX Consultancy, building responsive web architectures, or deploying quantized open-weight AI models on edge Linux environments, I focus on clean, scalable, and high-converting digital systems.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-slate-800">
+                    <div class="p-4 rounded-2xl bg-void/80 border border-slate-800">
+                        <div class="text-2xl font-display font-bold gradient-text">M.Sc.</div>
+                        <div class="text-xs text-slate-400 mt-1">Computer Science</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-void/80 border border-slate-800">
+                        <div class="text-2xl font-display font-bold gradient-text">30+</div>
+                        <div class="text-xs text-slate-400 mt-1">Projects Delivered</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-void/80 border border-slate-800">
+                        <div class="text-2xl font-display font-bold gradient-text">4</div>
+                        <div class="text-xs text-slate-400 mt-1">Fluent Languages</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-void/80 border border-slate-800">
+                        <div class="text-2xl font-display font-bold gradient-text">3</div>
+                        <div class="text-xs text-slate-400 mt-1">Security Certs</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 space-y-6">
+                <div class="tilt-card glass-panel rounded-3xl p-7 space-y-4">
+                    <h2 class="font-display font-bold text-xl text-white flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-emerald-400"></i> Core Engineering Pillars
+                    </h2>
+                    <div class="p-4 rounded-2xl bg-void/80 border border-slate-800">
+                        <div class="font-semibold text-emerald-300 text-sm">01. Full-Stack Web & Custom Platforms</div>
+                        <p class="text-xs text-slate-400 mt-1">HTML5, CSS3, JavaScript, Tailwind, WordPress/Elementor, and custom domain architectures.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-void/80 border border-slate-800">
+                        <div class="font-semibold text-sky-300 text-sm">02. AI Automation & Local LLM Workflows</div>
+                        <p class="text-xs text-slate-400 mt-1">Custom prompt engineering, OpenRouter API pipelines, and running local models on Linux.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-void/80 border border-slate-800">
+                        <div class="font-semibold text-amber-300 text-sm">03. Network Security & E-Commerce SEO</div>
+                        <p class="text-xs text-slate-400 mt-1">CCNA/Palo Alto/CEH infrastructure security paired with high-ranking marketplace SEO.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                card.style.transform = `perspective(1000px) rotateX(${((e.clientY - r.top)/r.height - 0.5)*-8}deg) rotateY(${((e.clientX - r.left)/r.width - 0.5)*8}deg)`;
+            });
+            card.addEventListener('mouseleave', () => card.style.transform = 'none');
+        });
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 1000);
+        camera.position.set(1, 0.5, 5);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-canvas'), alpha: true, antialias: true });
+        renderer.setSize(innerWidth, innerHeight);
+        const geo = new THREE.Mesh(new THREE.OctahedronGeometry(1.9, 2), new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.15 }));
+        scene.add(geo);
+        function animate() { requestAnimationFrame(animate); geo.rotation.y += 0.002; geo.rotation.x += 0.001; renderer.render(scene, camera); }
+        animate();
+        window.addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+    </script>
+</body>
+</html>
