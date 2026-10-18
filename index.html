@@ -1,13 +1,218 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naseebullah Safi | Head of Technology & Full-Stack Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+                    colors: { void: '#050811', obsidian: '#0b1120' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #050811; color: #e2e8f0; overflow-x: hidden; }
+        #webgl-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        .gradient-text { background: linear-gradient(135deg, #34d399 0%, #38bdf8 50%, #fbbf24 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-panel { background: rgba(13, 21, 38, 0.74); backdrop-filter: blur(18px); border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.55); }
+        .tilt-card { transform-style: preserve-3d; transition: transform 0.18s ease-out, border-color 0.3s ease, box-shadow 0.3s ease; }
+        .tilt-card:hover { border-color: rgba(16, 185, 129, 0.55); box-shadow: 0 25px 60px -12px rgba(16, 185, 129, 0.22); }
+        .page-enter { animation: pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes pageEnter { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .typing-cursor::after { content: '▋'; color: #10b981; animation: blink 1s step-start infinite; margin-left: 4px; }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body class="selection:bg-emerald-500 selection:text-slate-950">
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-void/90 backdrop-blur-xl border-b border-emerald-500/20">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center font-mono font-bold text-emerald-400">&lt;NS/&gt;</div>
+                <div>
+                    <span class="font-display font-bold text-white text-base block leading-none">Naseebullah Safi</span>
+                    <span class="font-mono text-[11px] text-emerald-400">01 // INDEX.HTML</span>
+                </div>
+            </a>
+            <div class="hidden lg:flex items-center gap-2 text-sm font-medium">
+                <a href="index.html" class="px-3.5 py-2 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300">Home</a>
+                <a href="about.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition">About</a>
+                <a href="education.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition">Education</a>
+                <a href="experience.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition">Experience</a>
+                <a href="projects.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition">Projects</a>
+                <a href="skills.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition">Skills</a>
+                <a href="contact.html" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-bold hover:brightness-110 transition ml-2">Contact</a>
+            </div>
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden bg-obsidian border-t border-slate-800 px-6 py-4 flex flex-col gap-2 text-sm">
+            <a href="index.html" class="py-2 text-emerald-400 font-semibold">01. Home (index.html)</a>
+            <a href="about.html" class="py-2 text-slate-300">02. About (about.html)</a>
+            <a href="education.html" class="py-2 text-slate-300">03. Education (education.html)</a>
+            <a href="experience.html" class="py-2 text-slate-300">04. Experience (experience.html)</a>
+            <a href="projects.html" class="py-2 text-slate-300">05. Projects (projects.html)</a>
+            <a href="skills.html" class="py-2 text-slate-300">06. Skills (skills.html)</a>
+            <a href="contact.html" class="py-2 text-amber-400 font-semibold">07. Contact (contact.html)</a>
+        </div>
+    </header>
+
+    <!-- Main Hero Content -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 lg:py-20 page-enter">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-xs">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>AVAILABLE FOR ARCHITECTURE & FULL-STACK ROLES</span>
+                </div>
+                <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08]">
+                    <span class="text-white block">Hello, I'm</span>
+                    <span class="gradient-text">Naseebullah Safi</span>
+                </h1>
+                <div class="text-lg sm:text-2xl font-mono text-slate-300 h-9 flex items-center">
+                    <span class="text-emerald-400 mr-2">&gt;</span>
+                    <span id="typed-role"></span><span class="typing-cursor"></span>
+                </div>
+                <p class="text-slate-300/90 text-base sm:text-lg leading-relaxed max-w-2xl">
+                    Head of Technology & Full-Stack Software Engineer combining M.Sc. Computer Science rigor with enterprise network security (CCNA, Palo Alto, CEH) and AI-powered e-commerce ecosystems.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="projects.html" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 text-slate-950 font-bold hover:brightness-110 transition shadow-xl shadow-emerald-500/20 flex items-center gap-2">
+                        <span>Explore Projects</span><i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="about.html" class="px-7 py-3.5 rounded-xl glass-panel text-white font-semibold hover:border-emerald-400/60 transition flex items-center gap-2">
+                        <i class="fa-solid fa-user-astronaut text-emerald-400"></i><span>About Me</span>
+                    </a>
+                </div>
+
+                <!-- Multi-Page Directory Grid -->
+                <div class="pt-6 border-t border-slate-800/80">
+                    <p class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-3">Multi-Page Architecture Directory:</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <a href="about.html" class="p-3.5 rounded-xl glass-panel hover:border-emerald-500/50 transition block">
+                            <span class="font-mono text-xs text-emerald-400">01 / about.html</span>
+                            <span class="text-white font-semibold text-sm block mt-1">Who I Am & Vision</span>
+                        </a>
+                        <a href="education.html" class="p-3.5 rounded-xl glass-panel hover:border-amber-500/50 transition block">
+                            <span class="font-mono text-xs text-amber-400">02 / education.html</span>
+                            <span class="text-white font-semibold text-sm block mt-1">Degrees & Certs</span>
+                        </a>
+                        <a href="experience.html" class="p-3.5 rounded-xl glass-panel hover:border-sky-500/50 transition block">
+                            <span class="font-mono text-xs text-sky-400">03 / experience.html</span>
+                            <span class="text-white font-semibold text-sm block mt-1">Work Experience</span>
+                        </a>
+                        <a href="projects.html" class="p-3.5 rounded-xl glass-panel hover:border-emerald-500/50 transition block">
+                            <span class="font-mono text-xs text-emerald-400">04 / projects.html</span>
+                            <span class="text-white font-semibold text-sm block mt-1">3D Case Studies</span>
+                        </a>
+                        <a href="skills.html" class="p-3.5 rounded-xl glass-panel hover:border-amber-500/50 transition block">
+                            <span class="font-mono text-xs text-amber-400">05 / skills.html</span>
+                            <span class="text-white font-semibold text-sm block mt-1">Technical Arsenal</span>
+                        </a>
+                        <a href="contact.html" class="p-3.5 rounded-xl glass-panel hover:border-sky-500/50 transition block">
+                            <span class="font-mono text-xs text-sky-400">06 / contact.html</span>
+                            <span class="text-white font-semibold text-sm block mt-1">Direct Connect</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3D Command Card -->
+            <div class="lg:col-span-5">
+                <div class="tilt-card glass-panel rounded-3xl p-7 space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-sky-500 p-0.5">
+                                <div class="w-full h-full bg-obsidian rounded-[14px] flex items-center justify-center font-display font-bold text-xl text-emerald-400">NS</div>
+                            </div>
+                            <div>
+                                <h2 class="font-display font-bold text-white text-lg">Naseebullah Safi</h2>
+                                <p class="font-mono text-xs text-emerald-400">Head of Technology @ AFEX</p>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-300 font-mono text-xs">M.Sc. CS</span>
+                    </div>
+                    <div class="bg-void/90 rounded-2xl p-4 border border-slate-800 font-mono text-xs space-y-2">
+                        <div class="text-slate-500">// system_profile.json</div>
+                        <div><span class="text-sky-400">"academic"</span>: <span class="text-emerald-300">"M.Sc. & B.Sc. Computer Science"</span>,</div>
+                        <div><span class="text-sky-400">"security"</span>: <span class="text-amber-300">["CCNA", "Palo Alto", "CEH"]</span>,</div>
+                        <div><span class="text-sky-400">"specialties"</span>: <span class="text-emerald-300">["Full-Stack", "AI", "SEO"]</span>,</div>
+                        <div><span class="text-sky-400">"languages"</span>: <span class="text-sky-300">["EN", "PS", "FA", "UR"]</span></div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 text-center">
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="font-display text-2xl font-bold gradient-text">5+</div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">Years Exp</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="font-display text-2xl font-bold gradient-text">30+</div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">Deployments</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="font-display text-2xl font-bold gradient-text">3</div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">Security Certs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Typing Effect
+        const roles = ["Head of Technology @ AFEX Consultancy", "Full-Stack Software Engineer (M.Sc. CS)", "AI Workflow & Prompt Architect", "Network Security Specialist (CCNA / CEH)"];
+        let rIdx = 0, cIdx = 0, del = false;
+        function typeLoop() {
+            const el = document.getElementById('typed-role');
+            const curr = roles[rIdx];
+            el.textContent = curr.substring(0, cIdx);
+            if (!del && cIdx < curr.length) { cIdx++; setTimeout(typeLoop, 55); }
+            else if (!del && cIdx === curr.length) { del = true; setTimeout(typeLoop, 1800); }
+            else if (del && cIdx > 0) { cIdx--; setTimeout(typeLoop, 28); }
+            else { del = false; rIdx = (rIdx + 1) % roles.length; setTimeout(typeLoop, 300); }
+        }
+        typeLoop();
+
+        // 3D Tilt Cards
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                const rx = ((e.clientY - r.top) / r.height - 0.5) * -10;
+                const ry = ((e.clientX - r.left) / r.width - 0.5) * 10;
+                card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+            });
+            card.addEventListener('mouseleave', () => card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)');
+        });
+
+        // Three.js Background
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-canvas'), alpha: true, antialias: true });
+        renderer.setSize(innerWidth, innerHeight);
+        const mesh = new THREE.Mesh(new THREE.IcosahedronGeometry(1.8, 1), new THREE.MeshBasicMaterial({ color: 0x10b981, wireframe: true, transparent: true, opacity: 0.18 }));
+        const inner = new THREE.Mesh(new THREE.TorusKnotGeometry(0.85, 0.2, 80, 16), new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.12 }));
+        scene.add(mesh, inner);
+        function animate() {
+            requestAnimationFrame(animate);
+            mesh.rotation.y += 0.0025; mesh.rotation.x += 0.0015;
+            inner.rotation.y -= 0.004;
+            renderer.render(scene, camera);
+        }
+        animate();
+        window.addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+    </script>
+</body>
 </html>
