@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience | Naseebullah Safi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }, colors: { void: '#050811', obsidian: '#0b1120' } } }
+        }
+    </script>
+    <style>
+        body { background-color: #050811; color: #e2e8f0; overflow-x: hidden; }
+        #webgl-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        .glass-panel { background: rgba(13, 21, 38, 0.74); backdrop-filter: blur(18px); border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.55); }
+        .tilt-card { transform-style: preserve-3d; transition: transform 0.18s ease-out, border-color 0.3s ease; }
+        .tilt-card:hover { border-color: rgba(56, 189, 248, 0.55); }
+        .page-enter { animation: pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-void/90 backdrop-blur-xl border-b border-emerald-500/20">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center font-mono font-bold text-emerald-400">&lt;NS/&gt;</div>
+                <div>
+                    <span class="font-display font-bold text-white text-base block leading-none">Naseebullah Safi</span>
+                    <span class="font-mono text-[11px] text-sky-400">04 // EXPERIENCE.HTML</span>
+                </div>
+            </a>
+            <div class="hidden lg:flex items-center gap-2 text-sm font-medium">
+                <a href="index.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Home</a>
+                <a href="about.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">About</a>
+                <a href="education.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Education</a>
+                <a href="experience.html" class="px-3.5 py-2 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300">Experience</a>
+                <a href="projects.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Projects</a>
+                <a href="skills.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Skills</a>
+                <a href="contact.html" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-bold ml-2">Contact</a>
+            </div>
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300"><i class="fa-solid fa-bars"></i></button>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden bg-obsidian border-t border-slate-800 px-6 py-4 flex flex-col gap-2 text-sm">
+            <a href="index.html" class="py-2 text-slate-300">01. Home</a>
+            <a href="about.html" class="py-2 text-slate-300">02. About</a>
+            <a href="education.html" class="py-2 text-slate-300">03. Education</a>
+            <a href="experience.html" class="py-2 text-emerald-400 font-semibold">04. Experience</a>
+            <a href="projects.html" class="py-2 text-slate-300">05. Projects</a>
+            <a href="skills.html" class="py-2 text-slate-300">06. Skills</a>
+            <a href="contact.html" class="py-2 text-amber-400">07. Contact</a>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 page-enter">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-10">
+            <div>
+                <span class="font-mono text-xs uppercase tracking-widest text-sky-400 block mb-1">PAGE 04 // EXPERIENCE.HTML</span>
+                <h1 class="font-display text-3xl sm:text-5xl font-bold text-white">Professional Work Experience</h1>
+            </div>
+            <div class="flex gap-2">
+                <a href="education.html" class="px-4 py-2 rounded-xl glass-panel text-xs font-mono text-slate-300 hover:text-white">&larr; education.html</a>
+                <a href="projects.html" class="px-4 py-2 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-xs font-mono text-emerald-300 hover:bg-emerald-500 hover:text-slate-950 transition">projects.html &rarr;</a>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <!-- Role 1 -->
+            <div class="tilt-card glass-panel rounded-3xl p-8">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <div>
+                        <h2 class="font-display text-2xl font-bold text-white">Head of Technology Department</h2>
+                        <p class="text-emerald-400 font-medium">AFEX Consultancy — Kabul, Afghanistan</p>
+                    </div>
+                    <span class="px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-mono text-xs">Present Leadership Role</span>
+                </div>
+                <ul class="space-y-2 text-slate-300 text-sm mb-5 list-disc list-inside">
+                    <li>Spearhead all technology architecture, web development, digital operations, and network security for AFEX Consultancy.</li>
+                    <li>Established and verified the live Google Business infrastructure and regional digital presence in Taimani Sabiqa, Kabul.</li>
+                    <li>Automated internal operational workflows and configured secure cross-device network sharing and firewall policies.</li>
+                </ul>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-lg bg-void border border-slate-700 font-mono text-xs text-emerald-300">Technical Leadership</span>
+                    <span class="px-3 py-1 rounded-lg bg-void border border-slate-700 font-mono text-xs text-emerald-300">Web Architecture</span>
+                    <span class="px-3 py-1 rounded-lg bg-void border border-slate-700 font-mono text-xs text-emerald-300">Network Security</span>
+                </div>
+            </div>
+
+            <!-- Role 2 -->
+            <div class="tilt-card glass-panel rounded-3xl p-8">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <div>
+                        <h2 class="font-display text-2xl font-bold text-white">E-Commerce Technical Lead & SEO Architect</h2>
+                        <p class="text-sky-400 font-medium">Wildberries & Ozon Multi-Brand Operations</p>
+                    </div>
+                    <span class="px-4 py-1.5 rounded-full bg-sky-500/15 border border-sky-500/40 text-sky-300 font-mono text-xs">E-Commerce & AI</span>
+                </div>
+                <ul class="space-y-2 text-slate-300 text-sm mb-5 list-disc list-inside">
+                    <li>Direct product listing architecture, keyword SEO optimization, and category analytics for cosmetic and skincare brands including TRELYRA, LUX AURA, SAMIN, SAMINGUL, Pulp Cosmetics, and GEGEMOON.</li>
+                    <li>Designed custom AI prompt systems to generate high-trust, brand-safe customer review responses that boost conversion and buyer loyalty.</li>
+                </ul>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-lg bg-void border border-slate-700 font-mono text-xs text-sky-300">Wildberries & Ozon SEO</span>
+                    <span class="px-3 py-1 rounded-lg bg-void border border-slate-700 font-mono text-xs text-sky-300">AI Prompt Workflows</span>
+                    <span class="px-3 py-1 rounded-lg bg-void border border-slate-700 font-mono text-xs text-sky-300">Conversion Optimization</span>
+                </div>
+            </div>
+
+            <!-- Role 3 -->
+            <div class="tilt-card glass-panel rounded-3xl p-8">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <div>
+                        <h2 class="font-display text-2xl font-bold text-white">Software Engineering Intern</h2>
+                        <p class="text-amber-400 font-medium">Flamingo Coding — Pune, India</p>
+                    </div>
+                    <span class="px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-300 font-mono text-xs">6-Month Intensive</span>
+                </div>
+                <ul class="space-y-2 text-slate-300 text-sm mb-5 list-disc list-inside">
+                    <li>Engineered responsive front-end interfaces and full-stack web features alongside senior developers in an agile environment.</li>
+                    <li>Collaborated on database schema optimization, code reviews, and UI performance tuning.</li>
+                </ul>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-lg bg-void border border-slate-700 font-mono text-xs text-amber-300">HTML5 / CSS3 / JS</span>
+                    <span class="px-3 py-1 rounded-lg bg-void border border-slate-700 font-mono text-xs text-amber-300">Full-Stack Development</span>
+                    <span class="px-3 py-1 rounded-lg bg-void border border-slate-700 font-mono text-xs text-amber-300">Agile Engineering</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                card.style.transform = `perspective(1000px) rotateX(${((e.clientY - r.top)/r.height - 0.5)*-6}deg) rotateY(${((e.clientX - r.left)/r.width - 0.5)*6}deg)`;
+            });
+            card.addEventListener('mouseleave', () => card.style.transform = 'none');
+        });
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-canvas'), alpha: true, antialias: true });
+        renderer.setSize(innerWidth, innerHeight);
+        const knot = new THREE.Mesh(new THREE.TorusKnotGeometry(1.3, 0.3, 100, 16), new THREE.MeshBasicMaterial({ color: 0x10b981, wireframe: true, transparent: true, opacity: 0.14 }));
+        scene.add(knot);
+        function animate() { requestAnimationFrame(animate); knot.rotation.y += 0.003; knot.rotation.x += 0.0015; renderer.render(scene, camera); }
+        animate();
+        window.addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+    </script>
+</body>
+</html>
