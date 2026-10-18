@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education | Naseebullah Safi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }, colors: { void: '#050811', obsidian: '#0b1120' } } }
+        }
+    </script>
+    <style>
+        body { background-color: #050811; color: #e2e8f0; overflow-x: hidden; }
+        #webgl-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        .glass-panel { background: rgba(13, 21, 38, 0.74); backdrop-filter: blur(18px); border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.55); }
+        .tilt-card { transform-style: preserve-3d; transition: transform 0.18s ease-out, border-color 0.3s ease; }
+        .tilt-card:hover { border-color: rgba(245, 158, 11, 0.55); }
+        .page-enter { animation: pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-void/90 backdrop-blur-xl border-b border-emerald-500/20">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center font-mono font-bold text-emerald-400">&lt;NS/&gt;</div>
+                <div>
+                    <span class="font-display font-bold text-white text-base block leading-none">Naseebullah Safi</span>
+                    <span class="font-mono text-[11px] text-amber-400">03 // EDUCATION.HTML</span>
+                </div>
+            </a>
+            <div class="hidden lg:flex items-center gap-2 text-sm font-medium">
+                <a href="index.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Home</a>
+                <a href="about.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">About</a>
+                <a href="education.html" class="px-3.5 py-2 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300">Education</a>
+                <a href="experience.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Experience</a>
+                <a href="projects.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Projects</a>
+                <a href="skills.html" class="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white transition">Skills</a>
+                <a href="contact.html" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-bold ml-2">Contact</a>
+            </div>
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300"><i class="fa-solid fa-bars"></i></button>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden bg-obsidian border-t border-slate-800 px-6 py-4 flex flex-col gap-2 text-sm">
+            <a href="index.html" class="py-2 text-slate-300">01. Home</a>
+            <a href="about.html" class="py-2 text-slate-300">02. About</a>
+            <a href="education.html" class="py-2 text-emerald-400 font-semibold">03. Education</a>
+            <a href="experience.html" class="py-2 text-slate-300">04. Experience</a>
+            <a href="projects.html" class="py-2 text-slate-300">05. Projects</a>
+            <a href="skills.html" class="py-2 text-slate-300">06. Skills</a>
+            <a href="contact.html" class="py-2 text-amber-400">07. Contact</a>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 page-enter">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-10">
+            <div>
+                <span class="font-mono text-xs uppercase tracking-widest text-amber-400 block mb-1">PAGE 03 // EDUCATION.HTML</span>
+                <h1 class="font-display text-3xl sm:text-5xl font-bold text-white">Academic Degrees & Security Credentials</h1>
+            </div>
+            <div class="flex gap-2">
+                <a href="about.html" class="px-4 py-2 rounded-xl glass-panel text-xs font-mono text-slate-300 hover:text-white">&larr; about.html</a>
+                <a href="experience.html" class="px-4 py-2 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-xs font-mono text-emerald-300 hover:bg-emerald-500 hover:text-slate-950 transition">experience.html &rarr;</a>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Degree 1 -->
+            <div class="tilt-card glass-panel rounded-3xl p-7 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-mono text-xs">Postgraduate Degree</span>
+                        <i class="fa-solid fa-user-graduate text-emerald-400 text-xl"></i>
+                    </div>
+                    <h2 class="font-display text-2xl font-bold text-white">Master of Science in Computer Science</h2>
+                    <p class="text-emerald-400 font-medium text-sm">Modern College of Arts, Science & Commerce — Pune, India</p>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Advanced postgraduate specialization in software architecture, distributed computing, full-stack application development, and artificial intelligence systems.
+                    </p>
+                </div>
+                <div class="pt-6 mt-6 border-t border-slate-800 flex flex-wrap gap-2">
+                    <span class="px-2.5 py-1 rounded-md bg-void text-xs font-mono text-slate-300">Distributed Systems</span>
+                    <span class="px-2.5 py-1 rounded-md bg-void text-xs font-mono text-slate-300">Advanced Algorithms</span>
+                </div>
+            </div>
+
+            <!-- Degree 2 -->
+            <div class="tilt-card glass-panel rounded-3xl p-7 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-3 py-1 rounded-full bg-sky-500/15 border border-sky-500/40 text-sky-300 font-mono text-xs">Undergraduate Degree</span>
+                        <i class="fa-solid fa-graduation-cap text-sky-400 text-xl"></i>
+                    </div>
+                    <h2 class="font-display text-2xl font-bold text-white">Bachelor of Science in Computer Science</h2>
+                    <p class="text-sky-400 font-medium text-sm">Fergusson College / Modern College — Pune, India</p>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Comprehensive undergraduate foundation in computer science, object-oriented programming, database management, and computer networks. Built a full-stack Hostel Management System as the final-semester capstone.
+                    </p>
+                </div>
+                <div class="pt-6 mt-6 border-t border-slate-800 flex flex-wrap gap-2">
+                    <span class="px-2.5 py-1 rounded-md bg-void text-xs font-mono text-slate-300">Capstone: Hostel System</span>
+                    <span class="px-2.5 py-1 rounded-md bg-void text-xs font-mono text-slate-300">SQL & OOP</span>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="tilt-card glass-panel rounded-3xl p-7 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-300 font-mono text-xs">Enterprise Certifications</span>
+                        <i class="fa-solid fa-shield-halved text-amber-400 text-xl"></i>
+                    </div>
+                    <h2 class="font-display text-2xl font-bold text-white">CCNA, Palo Alto Firewall & CEH</h2>
+                    <p class="text-amber-400 font-medium text-sm">Network Infrastructure & Offensive/Defensive Security</p>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Certified in Cisco Certified Network Associate (CCNA), Palo Alto Networks Next-Generation Firewalls, and Certified Ethical Hacker (CEH) methodologies.
+                    </p>
+                </div>
+                <div class="pt-6 mt-6 border-t border-slate-800 flex flex-wrap gap-2">
+                    <span class="px-2.5 py-1 rounded-md bg-void text-xs font-mono text-amber-300">CCNA</span>
+                    <span class="px-2.5 py-1 rounded-md bg-void text-xs font-mono text-amber-300">Palo Alto Firewall</span>
+                    <span class="px-2.5 py-1 rounded-md bg-void text-xs font-mono text-amber-300">CEH</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                card.style.transform = `perspective(1000px) rotateX(${((e.clientY - r.top)/r.height - 0.5)*-8}deg) rotateY(${((e.clientX - r.left)/r.width - 0.5)*8}deg)`;
+            });
+            card.addEventListener('mouseleave', () => card.style.transform = 'none');
+        });
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-canvas'), alpha: true, antialias: true });
+        renderer.setSize(innerWidth, innerHeight);
+        const torus = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.4, 16, 60), new THREE.MeshBasicMaterial({ color: 0xf59e0b, wireframe: true, transparent: true, opacity: 0.14 }));
+        scene.add(torus);
+        function animate() { requestAnimationFrame(animate); torus.rotation.x += 0.002; torus.rotation.y += 0.003; renderer.render(scene, camera); }
+        animate();
+        window.addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+    </script>
+</body>
+</html>
