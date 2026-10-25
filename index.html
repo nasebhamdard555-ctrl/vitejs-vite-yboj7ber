@@ -59,7 +59,6 @@
       from { opacity: 0; transform: translateY(24px) scale(0.99); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
-    /* Graphic Page Transition Overlay */
     #page-transition {
       position: fixed; inset: 0; z-index: 9999; pointer-events: none;
       background: radial-gradient(circle at center, #0c1f16 0%, #040806 100%);
@@ -91,8 +90,9 @@
         margin: 0 !important;
         padding: 0 !important;
         overflow: visible !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
-      /* Completely remove non-CV elements so extra blank pages are never generated */
       #page-transition,
       #webgl-canvas,
       header,
@@ -147,7 +147,6 @@
   </style>
 </head>
 <body>
-  <!-- Graphic Page Transition Overlay -->
   <div id="page-transition">
     <div class="w-14 h-14 rounded-2xl bg-forest border border-gold/50 flex items-center justify-center font-mono font-bold text-gold mb-4 shadow-lg shadow-gold/20">&lt;NS/&gt;</div>
     <p id="transition-label" class="font-mono text-xs uppercase tracking-[0.25em] text-gold-light mb-3">LOADING MODULE // INDEX.HTML</p>
@@ -156,7 +155,6 @@
 
   <canvas id="webgl-canvas"></canvas>
 
-  <!-- Navigation -->
   <header class="sticky top-0 z-50 bg-void/90 backdrop-blur-xl border-b border-gold/20">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3">
@@ -196,7 +194,6 @@
   </header>
 
   <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 page-enter space-y-16">
-    <!-- Hero Section -->
     <section id="hero-section" class="grid lg:grid-cols-12 gap-8 items-center">
       <div class="lg:col-span-7 space-y-6">
         <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-forest border border-gold/40 text-gold-light text-xs font-mono">
@@ -208,6 +205,131 @@
         </h1>
         <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
           I'm <strong class="text-gold-light">Naseebullah Safi</strong> — M.Sc. & B.Sc. Computer Science graduate from Pune, India. I architect full-stack web platforms, enterprise network security (<span class="text-emerald-300">CCNA, Palo Alto, CEH</span>), and high-converting AI workflows for global e-commerce marketplaces (<span class="text-gold-light">Wildberries & Ozon</span>).
+        </p>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <a href="projects.html" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-gold via-amber-400 to-emerald-500 text-void font-bold text-sm shadow-lg shadow-gold/20 hover:brightness-110 transition">
+            Explore Case Studies <i class="fa-solid fa-arrow-right ml-1.5"></i>
+          </a>
+          <a href="#cv-builder" class="px-6 py-3.5 rounded-xl glass-panel text-gold-light font-mono text-sm hover:border-gold transition">
+            <i class="fa-solid fa-wand-magic-sparkles mr-1.5 text-emerald-400"></i>Launch CV & Portfolio Studio
+          </a>
+          <a href="about.html" class="px-5 py-3.5 rounded-xl bg-obsidian/90 border border-emerald-500/30 text-emerald-300 font-mono text-sm hover:border-gold/50 transition">
+            02 // About.html &rarr;
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="tilt-card glass-panel rounded-3xl p-7 space-y-5 relative overflow-hidden">
+          <div class="flex items-center justify-between border-b border-gold/20 pb-4">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-gold"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+              <span class="w-3 h-3 rounded-full bg-slate-600"></span>
+            </div>
+            <span class="font-mono text-xs text-gold">system_profile.json</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-4 rounded-2xl bg-void/90 border border-gold/25">
+              <div class="text-2xl font-display font-bold gradient-text">M.Sc. CS</div>
+              <div class="text-xs text-slate-400 mt-1">Pune, India (Fergusson/Modern)</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-void/90 border border-gold/25">
+              <div class="text-2xl font-display font-bold gradient-text">6+ Brands</div>
+              <div class="text-xs text-slate-400 mt-1">Wildberries & Ozon SEO</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-void/90 border border-gold/25">
+              <div class="text-2xl font-display font-bold gradient-text">3 Certs</div>
+              <div class="text-xs text-slate-400 mt-1">CCNA, Palo Alto & CEH</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-void/90 border border-gold/25">
+              <div class="text-2xl font-display font-bold gradient-text">Edge AI</div>
+              <div class="text-xs text-slate-400 mt-1">Local LLMs & OpenRouter</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2 text-xs font-mono">
+            <a href="about.html" class="p-2.5 rounded-xl bg-forest/70 border border-gold/20 hover:border-gold text-center text-slate-200 transition">02. About</a>
+            <a href="education.html" class="p-2.5 rounded-xl bg-forest/70 border border-gold/20 hover:border-gold text-center text-slate-200 transition">03. Education</a>
+            <a href="experience.html" class="p-2.5 rounded-xl bg-forest/70 border border-gold/20 hover:border-gold text-center text-slate-200 transition">04. Experience</a>
+            <a href="projects.html" class="p-2.5 rounded-xl bg-forest/70 border border-gold/20 hover:border-gold text-center text-slate-200 transition">05. Projects</a>
+            <a href="skills.html" class="p-2.5 rounded-xl bg-forest/70 border border-gold/20 hover:border-gold text-center text-slate-200 transition">06. Skills</a>
+            <a href="contact.html" class="p-2.5 rounded-xl bg-forest/70 border border-gold/20 hover:border-gold text-center text-gold-light transition">07. Contact</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cv-builder" class="pt-6 border-t border-gold/20 space-y-8">
+      <div id="cv-builder-header" class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-widest text-gold block mb-1">// INTERACTIVE STUDIO FEATURE</span>
+          <h2 class="font-display text-3xl font-bold text-white">Instant CV & Portfolio Website Generator</h2>
+          <p class="text-slate-400 text-sm mt-1">Visitors can customize the fields below to generate a printable Executive CV or download a ready-to-host Dark Green & Gold HTML Portfolio.</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="loadNaseebPreset()" class="px-4 py-2.5 rounded-xl bg-forest border border-gold/40 text-gold-light font-mono text-xs hover:bg-gold hover:text-void font-semibold transition">
+            <i class="fa-solid fa-bolt mr-1"></i>Load Naseebullah's Profile
+          </button>
+          <button onclick="downloadGeneratedPortfolio()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-gold to-emerald-500 text-void font-mono font-bold text-xs shadow-md shadow-gold/20 hover:brightness-110 transition">
+            <i class="fa-solid fa-download mr-1"></i>Download Portfolio (.HTML)
+          </button>
+          <button onclick="printExecutiveCV()" class="px-4 py-2.5 rounded-xl glass-panel text-emerald-300 font-mono text-xs hover:border-gold transition">
+            <i class="fa-solid fa-file-pdf mr-1 text-gold"></i>Print / Save CV as PDF
+          </button>
+        </div>
+      </div>
+
+      <div id="cv-grid" class="grid lg:grid-cols-12 gap-8">
+        <div id="cv-input-form" class="lg:col-span-5 glass-panel rounded-3xl p-6 space-y-4">
+          <h3 class="font-display font-bold text-lg text-gold-light border-b border-gold/20 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-emerald-400"></i> 1. Configure Profile Data
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block font-mono text-[11px] text-gold mb-1">FULL NAME</label>
+              <input id="gen-name" oninput="updateCVPreview()" type="text" value="Naseebullah Safi" class="w-full px-3.5 py-2.5 rounded-xl bg-void border border-gold/30 text-sm text-white focus:outline-none focus:border-gold">
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] text-gold mb-1">HEADLINE ROLE</label>
+              <input id="gen-role" oninput="updateCVPreview()" type="text" value="Head of Technology & Full-Stack AI Engineer" class="w-full px-3.5 py-2.5 rounded-xl bg-void border border-gold/30 text-sm text-white focus:outline-none focus:border-gold">
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block font-mono text-[11px] text-gold mb-1">LOCATION / REMOTE</label>
+              <input id="gen-loc" oninput="updateCVPreview()" type="text" value="Kabul, Afghanistan | Global Remote" class="w-full px-3.5 py-2.5 rounded-xl bg-void border border-gold/30 text-sm text-white focus:outline-none focus:border-gold">
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] text-gold mb-1">EDUCATION & CERTS</label>
+              <input id="gen-edu" oninput="updateCVPreview()" type="text" value="M.Sc. & B.Sc. Computer Science (Pune) | CCNA, Palo Alto, CEH" class="w-full px-3.5 py-2.5 rounded-xl bg-void border border-gold/30 text-sm text-white focus:outline-none focus:border-gold">
+            </div>
+          </div>
+          <div>
+            <label class="block font-mono text-[11px] text-gold mb-1">EXECUTIVE SUMMARY</label>
+            <textarea id="gen-bio" oninput="updateCVPreview()" rows="3" class="w-full px-3.5 py-2 rounded-xl bg-void border border-gold/30 text-sm text-white focus:outline-none focus:border-gold">Full-Stack Software Engineer and Head of Technology bridging enterprise web architecture, CCNA/Palo Alto/CEH network security, and AI-driven e-commerce SEO across Wildberries and Ozon.</textarea>
+          </div>
+          <div>
+            <label class="block font-mono text-[11px] text-gold mb-1">CORE SKILLS (COMMA SEPARATED)</label>
+            <input id="gen-skills" oninput="updateCVPreview()" type="text" value="HTML5/CSS3/JS, Tailwind CSS, WordPress & Elementor, AI Prompt Engineering, Wildberries & Ozon SEO, CCNA & Palo Alto, Linux & Local LLMs, SQL" class="w-full px-3.5 py-2.5 rounded-xl bg-void border border-gold/30 text-sm text-white focus:outline-none focus:border-gold">
+          </div>
+          <div>
+            <label class="block font-mono text-[11px] text-gold mb-1">KEY EXPERIENCE & PROJECTS (ONE PER LINE)</label>
+            <textarea id="gen-exp" oninput="updateCVPreview()" rows="4" class="w-full px-3.5 py-2 rounded-xl bg-void border border-gold/30 text-sm text-white focus:outline-none focus:border-gold">Head of Technology @ AFEX Consultancy — Spearheading web architecture, Google Business verification, and network security.
+E-Commerce Technical Lead — Scaling TRELYRA, LUX AURA, SAMIN, SAMINGUL, Pulp Cosmetics & GEGEMOON on Wildberries & Ozon.
+Software Engineering Intern @ Flamingo Coding — Built responsive full-stack web interfaces and database workflows.
+Portable Linux & Edge AI Workstation — Deployed local Gemma & Mistral LLMs on UserLand Linux.</textarea>
+          </div>
+        </div>
+
+        <div id="cv-preview-wrapper" class="lg:col-span-7">
+          <div id="cv-preview-card" class="tilt-card glass-panel rounded-3xl p-8 space-y-6 border-2 border-gold/40">
+            <div class="flex flex-wrap items-start justify-between gap-4 border-b border-gold/30 pb-5">
+              <div>
+                <span class="font-mono text-[11px] uppercase tracking-widest text-emerald-400 print-gold block">// LIVE EXECUTIVE CV & PORTFOLIO PREVIEW</span>
+                <h3 id="prev-name" class="font-display text-3xl font-bold text-white mt-1">Naseebullah Safi</h3>
+                <p id="prev-role" class="text-gold-light font-medium text-base">Head of Technology & Full-Stack AI Engineer</p>
+              </div>
+              <div class="text-right font-mono text-xs text-slate-300 space-yor global e-commerce marketplaces (<span class="text-gold-light">Wildberries & Ozon</span>).
         </p>
         <div class="flex flex-wrap gap-3 pt-2">
           <a href="projects.html" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-gold via-amber-400 to-emerald-500 text-void font-bold text-sm shadow-lg shadow-gold/20 hover:brightness-110 transition">
